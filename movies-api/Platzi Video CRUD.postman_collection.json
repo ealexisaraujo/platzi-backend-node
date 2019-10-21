@@ -53,13 +53,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/movies",
+					"raw": "{{url}}/api/users",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"movies"
+						"users"
 					]
 				}
 			},
@@ -71,14 +71,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/movies/abc",
+					"raw": "{{url}}/api/movies/5dae12b23135076e623e27bf",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"movies",
-						"abc"
+						"5dae12b23135076e623e27bf"
 					]
 				}
 			},
@@ -98,7 +98,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Lorem ipsun dolor\"\n}",
+					"raw": "  {\n    \"title\": \"Notti bianche, Le (White Nights)\",\n    \"year\": 2019,\n    \"cover\": \"http://dummyimage.com/800x600.png/ff4444/ffffff\",\n    \"description\":\n      \"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n    \"duration\": 66,\n    \"contentRating\": \"G\",\n    \"source\": \"https://ovh.net/semper/rutrum/nulla/nunc.jsp\",\n    \"tags\": [\n      \"Action|Adventure\",\n      \"Action|Adventure|Thriller\",\n      \"Horror|Western\",\n      \"Horror|Thriller\",\n      \"Comedy|Romance|Sci-Fi\",\n      \"Adventure|Animation|Children|Comedy|Fantasy\",\n      \"Drama\"\n    ]\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +132,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Otro titulo\"\n}",
+					"raw": "{\n\t\"title\": \"Otro mejor titulo\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,14 +140,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/movies/abc",
+					"raw": "{{url}}/api/movies/5daa37590ec56a3fd42fa5ae",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"movies",
-						"abc"
+						"5daa37590ec56a3fd42fa5ae"
 					]
 				}
 			},
@@ -167,6 +167,25 @@
 						"api",
 						"movies",
 						"abc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/products/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"products",
+						""
 					]
 				}
 			},
