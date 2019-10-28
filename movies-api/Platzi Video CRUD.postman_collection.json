@@ -50,16 +50,26 @@
 		{
 			"name": "GET movies",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/users",
+					"raw": "{{url}}/api/movies",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"users"
+						"movies"
 					]
 				}
 			},
@@ -67,18 +77,41 @@
 		},
 		{
 			"name": "GET movies:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c6b4db77-dbc5-43fc-80ea-c2bde50dd997",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)",
+							"postman.setEnvironmentVariable('movie_id', jsonData.data[0]._id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/movies/5dae12b23135076e623e27bf",
+					"raw": "{{url}}/api/movies/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"movies",
-						"5dae12b23135076e623e27bf"
+						""
 					]
 				}
 			},
@@ -87,6 +120,16 @@
 		{
 			"name": "POST movie",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -98,7 +141,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "  {\n    \"title\": \"Notti bianche, Le (White Nights)\",\n    \"year\": 2019,\n    \"cover\": \"http://dummyimage.com/800x600.png/ff4444/ffffff\",\n    \"description\":\n      \"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n    \"duration\": 66,\n    \"contentRating\": \"G\",\n    \"source\": \"https://ovh.net/semper/rutrum/nulla/nunc.jsp\",\n    \"tags\": [\n      \"Action|Adventure\",\n      \"Action|Adventure|Thriller\",\n      \"Horror|Western\",\n      \"Horror|Thriller\",\n      \"Comedy|Romance|Sci-Fi\",\n      \"Adventure|Animation|Children|Comedy|Fantasy\",\n      \"Drama\"\n    ]\n  }",
+					"raw": "  {\n    \"title\": \"Prueba Alexis\",\n    \"year\": 2019,\n    \"cover\": \"http://dummyimage.com/800x600.png/ff4444/ffffff\",\n    \"description\":\n      \"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\",\n    \"duration\": 66,\n    \"contentRating\": \"G\",\n    \"source\": \"https://ovh.net/semper/rutrum/nulla/nunc.jsp\",\n    \"tags\": [\n      \"Action|Adventure\",\n      \"Action|Adventure|Thriller\",\n      \"Horror|Western\",\n      \"Horror|Thriller\",\n      \"Comedy|Romance|Sci-Fi\",\n      \"Adventure|Animation|Children|Comedy|Fantasy\",\n      \"Drama\"\n    ]\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,6 +156,107 @@
 					"path": [
 						"api",
 						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST auth/sign-in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "513cb9c0-21a9-4107-b2ce-19e56890f395",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)",
+							"postman.setEnvironmentVariable('access_token', jsonData.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ala_1289@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"apiKeyToken\": \"{{admin_api_key_token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/sign-in",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST auth/sign-up",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Alexis\",\n\t\"email\": \"ala_1289@gmail.com\",\n\t\"password\": \"secret\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/sign-up",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"sign-up"
 					]
 				}
 			},
